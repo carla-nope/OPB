@@ -1,0 +1,35 @@
+{
+  "build_command": "pnpm run build",
+  "capabilities": [],
+  "dev_command": "pnpm run dev",
+  "env_vars": {},
+  "experiments": null,
+  "git_remote": {
+    "repo_url": "s3://vida-prod-gitrepo/webdev-git/96284060/G3pCmRE8ZE7sNzpzvavE5s",
+    "access_key_id": "ASIAZV3A2ECZORWKFASG",
+    "secret_access_key": "izoGtV6cx4H6ORfli79uyHTVlWwFozh6NL7Xan2I",
+    "session_token": "IQoJb3JpZ2luX2VjEDoaCXVzLWVhc3QtMSJIMEYCIQDA0wSE612s7JfwcS53iYNV2Wj/35brAOlZr3W2zP/eEwIhALPDJRZyixR8KkGQI8mEEIXCiD7/rt35dEZzWAr4RIdWKuIDCAMQBBoMNjY1Mzg2MDk4ODY2IgxQDbA9tYS78HyfAwMqvwN0zjiIgtKiCKN3Nu/hh20WTbT4B4ED3oJ4rt4KjkvgQ3+VtmYSVHoi4f6pIhpDEbaN1TtUqTpnsVUqIzHt2PbpHCQ9AefNiq55aFwe7Cgu+gaiEceWSzYyOgDq1sOweCVUKLkHoXT9EH4lHc8F8b+1gD18XoKbcIkF9x6JDVmJg1Mvyn4m/l8r0o4dMjBRTbdox/zOjOEYk/Kz6ECb5lJynSiAF0D4+ioh4rAXmz+ISZ+lFFeoYilJeGGPqU12itnSH7upRcmVjbSU5Ovj23yD6qgEseXdBDUuwLwpUYa5hMaUtk2zUEMvL6ur4NHAcgcb6fGXRCg0B6EEQnBvvyVyC8mGpiJm7bnugp2nz7q1DC83mg37ICi+rw7Rpd5PIC0OSmoAi0wI55Yh0E7WS1h+3HDyQyrpbgIQiZ3gU5iDl1welS4EaElrAotqfbiwdgdAql9O7G39Ih25icUxcJHxKDxGWMU7gz29Nyt3SQre+gU0S5efKq1AgUgX0Tht5no+QpVyFNVmbC9rRfzktzhsZyIL6+1N8L/xb7Sr92hXD0cxLG+ZclE8xHlcbjE+AQSLMlpoFvRqPQqNQFS9F+EwlbC70AY6nAH+FMf07W0ndQFSzFhZb6C8up1mXz9ao3EY8lbr8pBEvReekvZBUIzMSflyecGI+ECblMnSjs6nIPiJDrokhtvZztziKPrjzbmnxzD56n2B0eiTXWFMD7WmokWV6Zt6HsZPIerYAA3fgWuLFNRErGntS5kKRyDd3klgi20HQX/fxYNeD2AIRGhqooaAfUr3mA+/whCMeGos0B3VSO4=",
+    "expiration": "2026-05-21T22:01:57.000Z"
+  },
+  "name": "operation-plant-based-site",
+  "path": "/home/ubuntu/operation-plant-based-site",
+  "port": 3000,
+  "secrets": {
+    "BUILT_IN_FORGE_API_KEY": "5GsppmJbpeLcCFkb2U3Jt2",
+    "BUILT_IN_FORGE_API_URL": "https://forge.manus.ai",
+    "JWT_SECRET": "gCnuFoUpoeJDAuG4KY84pz",
+    "OAUTH_SERVER_URL": "https://api.manus.im",
+    "OWNER_NAME": "Carla Platter",
+    "OWNER_OPEN_ID": "aqxEA4928pzvJJ24uBbyyg",
+    "VITE_ANALYTICS_ENDPOINT": "https://manus-analytics.com",
+    "VITE_ANALYTICS_WEBSITE_ID": "31f77f6e-f6e8-4373-8482-2dcd3c8de0a6",
+    "VITE_APP_ID": "G3pCmRE8ZE7sNzpzvavE5s",
+    "VITE_APP_LOGO": "",
+    "VITE_APP_TITLE": "Operation Plant Based",
+    "VITE_FRONTEND_FORGE_API_KEY": "QqLLHCTux7swNdVceswoun",
+    "VITE_FRONTEND_FORGE_API_URL": "https://forge.manus.ai",
+    "VITE_OAUTH_PORTAL_URL": "https://manus.im"
+  },
+  "template_id": "web-static",
+  "test_command": "pnpm test"
+}
