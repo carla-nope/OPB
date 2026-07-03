@@ -6,6 +6,7 @@ import { ArrowRight, ArrowLeft, CheckCircle2, Leaf } from "lucide-react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { Link } from "wouter";
+import { subscribe } from "@/lib/config";
 
 const PLANNER_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/96284060/G3pCmRE8ZE7sNzpzvavE5s/opb_mission_planner-XajjEr73sKgLfQ8exmwF5Z.webp";
 
@@ -65,33 +66,33 @@ const questions = [
 
 const barrierRecommendations: Record<string, { headline: string; desc: string; cta: string; href: string }> = {
   time: {
-    headline: "Your Plan: The 30-Minute Meal System",
-    desc: "You need quick, batch-friendly recipes and a weekly prep strategy. The Starter Kit includes a 7-day plan designed for busy schedules — most meals take under 30 minutes.",
-    cta: "Get the Starter Kit — $29",
+    headline: "Your Plan: The 30-Minute Family Meal System",
+    desc: "You need quick, batch-friendly meals and a weekly prep strategy. Start with the free 5-Day Family Starter Kit — every dinner takes 30 minutes or less — then level up with the Meal Prep Playbook.",
+    cta: "Get the Free Starter Kit",
     href: "/starter-kit",
   },
   family: {
-    headline: "Your Plan: The Family-Friendly Transition",
-    desc: "You need crowd-pleasing recipes that don't feel like 'health food.' The Starter Kit includes a family transition guide and 20 recipes even picky eaters enjoy.",
-    cta: "Get the Starter Kit — $29",
+    headline: "Your Plan: The Family Buy-In Playbook",
+    desc: "Your challenge isn't recipes — it's the people at your table. The free Starter Kit includes our family buy-in guide plus five dinners tested on real picky eaters.",
+    cta: "Get the Free Starter Kit",
     href: "/starter-kit",
   },
   cost: {
     headline: "Your Plan: The Budget Plant-Based Blueprint",
-    desc: "Plant-based eating can actually cost less. The Starter Kit includes a budget grocery guide and pantry staples list that cuts your weekly food spend.",
-    cta: "Get the Starter Kit — $29",
+    desc: "Plant-based eating can actually cost less. The free Starter Kit includes a budget-friendly grocery list, and the 10-week course has a full week on grocery budget mastery.",
+    cta: "Get the Free Starter Kit",
     href: "/starter-kit",
   },
   knowledge: {
-    headline: "Your Plan: The Beginner's Foundation",
-    desc: "You need a structured system, not random recipes. The 10-week course walks you through everything step by step — no prior knowledge required.",
-    cta: "Join the Beta Course Waitlist",
+    headline: "Your Plan: The Complete Foundation",
+    desc: "You need a structured system, not random recipes. The 10-Week Family Transformation walks you through everything step by step — no prior knowledge required.",
+    cta: "Explore the 10-Week Course",
     href: "/course",
   },
   cravings: {
     headline: "Your Plan: The Satisfaction Strategy",
-    desc: "Cravings are about satisfaction, not willpower. The Starter Kit includes a protein cheat sheet and comfort food swaps that actually taste good.",
-    cta: "Get the Starter Kit — $29",
+    desc: "Cravings are about satisfaction, not willpower. Start with the free Starter Kit's comfort-food-style dinners, then grab the Playbook for 30 kid-approved favorites.",
+    cta: "Get the Free Starter Kit",
     href: "/starter-kit",
   },
 };
@@ -115,10 +116,15 @@ export default function MissionPlanner() {
     }
   };
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
+  const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
     setStep(totalSteps + 2); // go to result
+    try {
+      await subscribe({ email, source: `mission-planner:${answers.barrier ?? "unknown"}` });
+    } catch {
+      // Non-blocking: still show the result even if capture fails
+    }
   };
 
   const recommendation = barrierRecommendations[answers.barrier] || barrierRecommendations.knowledge;
@@ -312,17 +318,4 @@ export default function MissionPlanner() {
 
             <div className="text-center">
               <Link href="/">
-                <span className="font-ui text-sm underline" style={{ color: "oklch(0.45 0.04 140)" }}>
-                  ← Back to home
-                </span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {step !== 0 && step !== totalSteps + 2 && <Footer />}
-      {step === totalSteps + 2 && <Footer />}
-    </div>
-  );
-}
+                <span className="font-ui text-sm under

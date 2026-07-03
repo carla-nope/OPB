@@ -1,62 +1,64 @@
 /* Course.tsx — Harvest Table Design System
-   10-Week Course / Beta Cohort Waitlist page */
+   10-Week Family Transformation — the core offer ($197, founding $97).
+   Shows checkout when BIZ.courseBuyUrl is set; otherwise founding-member waitlist. */
 
-import { useState } from "react";
-import { ArrowRight, CheckCircle2, Video, Users, BookOpen, Calendar } from "lucide-react";
+import { CheckCircle2, Video, Users, Calendar, ShieldCheck } from "lucide-react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import { toast } from "sonner";
+import LeadForm from "@/components/LeadForm";
+import { BIZ } from "@/lib/config";
 
 const COMMUNITY_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/96284060/G3pCmRE8ZE7sNzpzvavE5s/opb_community-hdjWTcRCREr94nmBxPyRmh.webp";
 
 const weeks = [
-  { week: "01", title: "Why Plant-Based?", desc: "The science, the myths, and your personal 'why' that will keep you going." },
-  { week: "02", title: "Building Your Foundation", desc: "Pantry setup, grocery strategy, and the 10 staples that make everything easier." },
-  { week: "03", title: "Mastering Protein", desc: "How to meet your protein needs without obsessing — and without supplements." },
-  { week: "04", title: "Quick Meals for Real Life", desc: "30-minute meals, batch cooking, and the 5-ingredient formula." },
-  { week: "05", title: "Navigating Social Situations", desc: "Restaurants, family dinners, travel, and holidays — handled." },
-  { week: "06", title: "Cravings & Comfort Food", desc: "Plant-based versions of your favorites that actually satisfy." },
-  { week: "07", title: "Nutrition Deep Dive", desc: "B12, iron, omega-3s, and the nutrients to pay attention to." },
-  { week: "08", title: "Budget & Meal Planning", desc: "How to eat plant-based for less than you spend now." },
-  { week: "09", title: "Making It Stick", desc: "Habit design, accountability systems, and dealing with setbacks." },
-  { week: "10", title: "Your Long-Term Plan", desc: "Building a sustainable practice and deciding what comes next." },
+  { week: "01", title: "The Buy-In Playbook", desc: "Get your partner neutral and your kids curious — before you change a single meal. Scripts included." },
+  { week: "02", title: "Change the Default, Not the Menu", desc: "Upgrade the meals your family already loves. Taco night stays taco night." },
+  { week: "03", title: "The Safe-Component System", desc: "Build every plate so picky eaters always have a landing spot — and end the short-order-cook era." },
+  { week: "04", title: "The 90-Minute Sunday", desc: "The batch-prep routine that makes weeknight dinners a 30-minute job." },
+  { week: "05", title: "Protein Without the Panic", desc: "What your family actually needs, how to hit it with plants, and how to answer the relatives." },
+  { week: "06", title: "Grocery Budget Mastery", desc: "Eat more plants for less than you spend now. Real store strategies, real numbers." },
+  { week: "07", title: "Restaurants, Parties & Grandma's House", desc: "Eating out, birthday parties, and holidays — handled without drama." },
+  { week: "08", title: "Cravings & Comfort Food", desc: "Plant-based versions of the favorites your family will actually accept." },
+  { week: "09", title: "When It Falls Apart", desc: "Sick weeks, sports seasons, and setbacks. The recovery playbook that keeps one bad week from becoming a bad month." },
+  { week: "10", title: "Your Family's Long-Term Table", desc: "Lock in the new default. Build your family's forever meal rotation and decide what's next." },
+];
+
+const features = [
+  { icon: <Video className="w-6 h-6" />, title: "Weekly Video Lessons", desc: "Short, practical lessons you can watch while the pasta boils. No fluff." },
+  { icon: <Calendar className="w-6 h-6" />, title: "Done-For-You Weekly Plans", desc: "Every week includes meal plans, grocery lists, and prep guides matched to the lesson." },
+  { icon: <Users className="w-6 h-6" />, title: "Private Community Access", desc: "Go through the program alongside other families in The Plant-Based Family Table." },
+  { icon: <CheckCircle2 className="w-6 h-6" />, title: "Live Monthly Q&A", desc: "Bring your hardest dinner-table problem. Leave with a plan." },
 ];
 
 export default function Course() {
-  const [email, setEmail] = useState("");
-  const [joined, setJoined] = useState(false);
-
-  const handleJoin = (e: React.FormEvent) => {
-    e.preventDefault();
-    setJoined(true);
-    toast.success("You're on the waitlist!", {
-      description: "We'll email you when the beta cohort opens with founding member pricing.",
-    });
-  };
+  const hasCheckout = Boolean(BIZ.courseBuyUrl);
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: "oklch(0.99 0.008 80)" }}>
       <Nav />
 
       {/* ── HERO ── */}
-      <section className="relative pt-16 overflow-hidden" style={{ minHeight: "65vh" }}>
+      <section className="relative pt-16 overflow-hidden" style={{ minHeight: "70vh" }}>
         <div className="absolute inset-0 z-0">
-          <img src={COMMUNITY_IMG} alt="Plant-based community" className="w-full h-full object-cover" style={{ objectPosition: "center 30%" }} />
+          <img src={COMMUNITY_IMG} alt="Families cooking plant-based meals together" className="w-full h-full object-cover" style={{ objectPosition: "center 30%" }} />
           <div className="absolute inset-0" style={{ background: "linear-gradient(105deg, oklch(0.22 0.04 140 / 0.92) 0%, oklch(0.22 0.04 140 / 0.65) 100%)" }} />
         </div>
-        <div className="container relative z-10 flex flex-col justify-center" style={{ minHeight: "calc(65vh - 4rem)", paddingTop: "4rem", paddingBottom: "4rem" }}>
+        <div className="container relative z-10 flex flex-col justify-center" style={{ minHeight: "calc(70vh - 4rem)", paddingTop: "4rem", paddingBottom: "4rem" }}>
           <div className="max-w-2xl">
-            <p className="section-label mb-3 animate-fade-up" style={{ color: "oklch(0.72 0.10 40)" }}>Beta Cohort — Founding Member Pricing</p>
-            <h1 className="font-display text-5xl md:text-6xl mb-5 animate-fade-up animate-fade-up-delay-1" style={{ color: "oklch(0.99 0.008 80)", lineHeight: "1.08" }}>
-              The 10-Week<br />
-              <span style={{ color: "oklch(0.72 0.10 40)" }}>Plant-Based Course</span>
-            </h1>
-            <p className="text-lg mb-8 animate-fade-up animate-fade-up-delay-2" style={{ color: "oklch(0.88 0.01 80)" }}>
-              Structured lessons, live Zoom coaching, and a private community. The beta cohort is forming now — join the waitlist for founding member pricing.
+            <p className="section-label mb-3" style={{ color: "oklch(0.72 0.10 40)" }}>
+              Founding Member Pricing — ${BIZ.prices.courseFounding} (Regular ${BIZ.prices.course})
             </p>
-            <a href="#waitlist">
-              <button className="btn-primary animate-fade-up animate-fade-up-delay-3">
-                Join the Beta Waitlist <ArrowRight className="w-4 h-4" />
+            <h1 className="font-display text-5xl md:text-6xl mb-5" style={{ color: "oklch(0.99 0.008 80)", lineHeight: "1.08" }}>
+              The 10-Week Family<br />
+              <span style={{ color: "oklch(0.72 0.10 40)" }}>Transformation</span>
+            </h1>
+            <p className="text-lg mb-8" style={{ color: "oklch(0.88 0.01 80)" }}>
+              The complete system for getting your family eating more plants — without the battles. Buy-in
+              strategies, meal prep mastery, budgets, restaurants, setbacks: all of it, week by week.
+            </p>
+            <a href="#enroll">
+              <button className="btn-primary">
+                {hasCheckout ? `Enroll Now — $${BIZ.prices.courseFounding}` : "Join the Founding Cohort Waitlist"}
               </button>
             </a>
           </div>
@@ -66,22 +68,12 @@ export default function Course() {
       {/* ── FEATURES ── */}
       <section className="py-20" style={{ background: "oklch(0.93 0.02 110)" }}>
         <div className="container">
-          <h2 className="font-display text-4xl mb-12 text-center" style={{ color: "oklch(0.22 0.04 140)" }}>
-            What's Included
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {[
-              { icon: <BookOpen className="w-6 h-6" />, title: "10 Weekly Modules", desc: "Structured video lessons you can watch on your own schedule." },
-              { icon: <Video className="w-6 h-6" />, title: "Live Zoom Calls", desc: "Weekly group coaching calls with Q&A — recorded if you can't attend live." },
-              { icon: <Users className="w-6 h-6" />, title: "Private Community", desc: "A members-only group for accountability, questions, and wins." },
-              { icon: <Calendar className="w-6 h-6" />, title: "Lifetime Access", desc: "Course materials, recordings, and community access — forever." },
-            ].map((item, i) => (
-              <div key={i} className="card-sage p-6 flex flex-col gap-3">
-                <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ background: "oklch(0.52 0.12 40 / 0.12)", color: "oklch(0.52 0.12 40)" }}>
-                  {item.icon}
-                </div>
-                <h3 className="font-display text-lg" style={{ color: "oklch(0.22 0.04 140)", fontSize: "1.1rem" }}>{item.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: "oklch(0.40 0.04 140)" }}>{item.desc}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {features.map((f, i) => (
+              <div key={i} className="card-sage p-7">
+                <div className="mb-4" style={{ color: "oklch(0.52 0.12 40)" }}>{f.icon}</div>
+                <h3 className="font-ui font-semibold mb-2" style={{ color: "oklch(0.22 0.04 140)" }}>{f.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "oklch(0.38 0.04 140)" }}>{f.desc}</p>
               </div>
             ))}
           </div>
@@ -89,24 +81,21 @@ export default function Course() {
       </section>
 
       {/* ── CURRICULUM ── */}
-      <section className="py-20" style={{ background: "oklch(0.99 0.008 80)" }}>
-        <div className="container max-w-3xl mx-auto">
-          <div className="mb-12">
-            <p className="section-label mb-2">The Curriculum</p>
-            <h2 className="font-display text-4xl" style={{ color: "oklch(0.22 0.04 140)" }}>
-              10 Weeks.<br />
-              <span style={{ color: "oklch(0.52 0.12 40)" }}>One Complete Transformation.</span>
-            </h2>
-          </div>
+      <section className="py-24">
+        <div className="container max-w-4xl mx-auto">
+          <p className="section-label mb-3 text-center">The Curriculum</p>
+          <h2 className="font-display text-3xl md:text-4xl text-center mb-12" style={{ color: "oklch(0.22 0.04 140)" }}>
+            Ten Weeks. One New Family Default.
+          </h2>
           <div className="space-y-4">
-            {weeks.map((w, i) => (
-              <div key={i} className="flex gap-5 p-5 rounded-xl border transition-all duration-200" style={{ borderColor: "oklch(0.88 0.02 110)", background: "oklch(0.99 0.008 80)" }}>
-                <span className="font-display text-3xl font-black flex-shrink-0" style={{ color: "oklch(0.88 0.02 110)", lineHeight: "1" }}>
+            {weeks.map((w) => (
+              <div key={w.week} className="card-sage p-6 flex items-start gap-5">
+                <span className="font-display text-3xl flex-shrink-0" style={{ color: "oklch(0.52 0.12 40 / 0.4)" }}>
                   {w.week}
                 </span>
                 <div>
                   <h3 className="font-ui font-semibold mb-1" style={{ color: "oklch(0.22 0.04 140)" }}>{w.title}</h3>
-                  <p className="text-sm" style={{ color: "oklch(0.45 0.04 140)" }}>{w.desc}</p>
+                  <p className="text-sm leading-relaxed" style={{ color: "oklch(0.38 0.04 140)" }}>{w.desc}</p>
                 </div>
               </div>
             ))}
@@ -114,41 +103,42 @@ export default function Course() {
         </div>
       </section>
 
-      {/* ── WAITLIST ── */}
-      <section id="waitlist" className="py-20" style={{ background: "oklch(0.28 0.04 140)" }}>
-        <div className="container max-w-xl mx-auto text-center">
-          <p className="section-label mb-3" style={{ color: "oklch(0.72 0.10 40)" }}>Beta Cohort</p>
-          <h2 className="font-display text-4xl mb-4" style={{ color: "oklch(0.99 0.008 80)" }}>
-            Join the Waitlist
-          </h2>
-          <p className="mb-8" style={{ color: "oklch(0.72 0.06 110)" }}>
-            Beta cohort members get founding member pricing and direct access to the instructor during the first run. Spots are limited.
-          </p>
-          {!joined ? (
-            <form onSubmit={handleJoin} className="space-y-4">
-              <input
-                type="email"
-                required
-                placeholder="your@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border-2 font-ui text-base outline-none"
-                style={{ borderColor: "oklch(0.38 0.04 140)", background: "oklch(0.32 0.04 140)", color: "oklch(0.99 0.008 80)" }}
-              />
-              <button type="submit" className="btn-primary w-full">
-                Join the Beta Waitlist <ArrowRight className="w-4 h-4" />
-              </button>
-            </form>
-          ) : (
-            <div className="rounded-xl p-6" style={{ background: "oklch(0.32 0.04 140)" }}>
-              <CheckCircle2 className="w-10 h-10 mx-auto mb-3" style={{ color: "oklch(0.72 0.10 40)" }} />
-              <p className="font-display text-xl mb-2" style={{ color: "oklch(0.99 0.008 80)" }}>You're on the list!</p>
-              <p className="text-sm" style={{ color: "oklch(0.72 0.06 110)" }}>
-                We'll email you at <strong>{email}</strong> when the beta cohort opens.
+      {/* ── ENROLL / WAITLIST ── */}
+      <section id="enroll" className="py-24" style={{ background: "oklch(0.22 0.04 140)" }}>
+        <div className="container max-w-xl mx-auto">
+          <div className="text-center mb-8">
+            <h2 className="font-display text-3xl md:text-4xl mb-4" style={{ color: "oklch(0.99 0.008 80)" }}>
+              {hasCheckout ? "Join the Founding Cohort" : "The Founding Cohort Is Forming"}
+            </h2>
+            <p className="text-base" style={{ color: "oklch(0.72 0.06 110)" }}>
+              Founding members get the full program for ${BIZ.prices.courseFounding} (regular ${BIZ.prices.course}),
+              direct input on the program, and lifetime access to all updates. In return, we ask for your honest
+              feedback and — if it works for your family — a testimonial.
+            </p>
+          </div>
+
+          {hasCheckout ? (
+            <div className="text-center">
+              <a href={BIZ.courseBuyUrl} target="_blank" rel="noopener noreferrer">
+                <button className="btn-primary">
+                  Enroll Now — ${BIZ.prices.courseFounding}
+                </button>
+              </a>
+              <p className="mt-4 text-xs flex items-center justify-center gap-2" style={{ color: "oklch(0.72 0.06 110)" }}>
+                <ShieldCheck className="w-4 h-4" /> 14-day money-back guarantee.
               </p>
             </div>
+          ) : (
+            <div className="rounded-2xl p-8" style={{ background: "oklch(0.99 0.008 80)" }}>
+              <LeadForm
+                source="course-founding-waitlist"
+                buttonLabel="Join the Founding Waitlist"
+                successTitle="You're on the founding list!"
+                successBody="We'll email you first when enrollment opens — at founding member pricing."
+                showName
+              />
+            </div>
           )}
-          <p className="mt-4 text-xs" style={{ color: "oklch(0.55 0.04 110)" }}>No spam. Unsubscribe anytime.</p>
         </div>
       </section>
 
@@ -156,3 +146,4 @@ export default function Course() {
     </div>
   );
 }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 

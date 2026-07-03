@@ -2,7 +2,8 @@
    Deep olive footer with warm white text, sienna accents */
 
 import { Link } from "wouter";
-import { Leaf, Instagram, Mail } from "lucide-react";
+import { Leaf, Instagram, Mail, Compass } from "lucide-react";
+import { BIZ } from "@/lib/config";
 
 export default function Footer() {
   return (
@@ -23,11 +24,21 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-sm leading-relaxed max-w-xs" style={{ color: "oklch(0.72 0.06 110)" }}>
-              Helping beginners transition to a plant-based lifestyle — one meal, one week, one habit at a time.
+              {BIZ.tagline} One meal, one week, one habit at a time.
             </p>
             <div className="flex items-center gap-3 mt-5">
               <a
-                href="https://instagram.com"
+                href={BIZ.pinterestUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors duration-150"
+                style={{ color: "oklch(0.72 0.06 110)" }}
+                aria-label="Pinterest"
+              >
+                <Compass className="w-5 h-5" />
+              </a>
+              <a
+                href={BIZ.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-colors duration-150"
@@ -37,7 +48,7 @@ export default function Footer() {
                 <Instagram className="w-5 h-5" />
               </a>
               <a
-                href="mailto:hello@operationplantbased.com"
+                href={`mailto:${BIZ.contactEmail}`}
                 className="transition-colors duration-150"
                 style={{ color: "oklch(0.72 0.06 110)" }}
                 aria-label="Email"
@@ -54,9 +65,11 @@ export default function Footer() {
             </p>
             <ul className="space-y-2 text-sm">
               {[
-                { href: "/mission-planner", label: "Free Mission Planner" },
-                { href: "/starter-kit", label: "Starter Kit — $29" },
+                { href: "/starter-kit", label: "Free 5-Day Starter Kit" },
+                { href: "/mission-planner", label: "Free 2-Minute Quiz" },
+                { href: "/playbook", label: `Meal Prep Playbook — $${BIZ.prices.playbook}` },
                 { href: "/course", label: "10-Week Course" },
+                { href: "/community", label: "Community" },
                 { href: "/blog", label: "Blog" },
                 { href: "/newsletter", label: "Newsletter" },
               ].map((link) => (
@@ -103,16 +116,4 @@ export default function Footer() {
 
         <hr className="my-8 opacity-20" style={{ borderColor: "oklch(0.99 0.008 80)" }} />
 
-        <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-xs" style={{ color: "oklch(0.55 0.04 110)" }}>
-          <p>© {new Date().getFullYear()} Operation Plant Based. All rights reserved.</p>
-          <p className="text-center">
-            This site is for educational purposes only. Not medical advice.{" "}
-            <Link href="/disclaimer">
-              <span className="underline">See disclaimer.</span>
-            </Link>
-          </p>
-        </div>
-      </div>
-    </footer>
-  );
-}
+        <div classNam

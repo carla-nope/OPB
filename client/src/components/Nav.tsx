@@ -6,9 +6,10 @@ import { Link, useLocation } from "wouter";
 import { Menu, X, Leaf } from "lucide-react";
 
 const navLinks = [
-  { href: "/mission-planner", label: "Free Planner" },
-  { href: "/starter-kit", label: "Starter Kit" },
+  { href: "/starter-kit", label: "Free Starter Kit" },
+  { href: "/playbook", label: "Playbook" },
   { href: "/course", label: "10-Week Course" },
+  { href: "/community", label: "Community" },
   { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
 ];
@@ -147,8 +148,4 @@ export default function Nav() {
               </button>
             </Link>
           </div>
-        </div>
-      </div>
-    </header>
-  );
-}
+        <
