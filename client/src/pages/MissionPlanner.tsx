@@ -101,7 +101,7 @@ export default function MissionPlanner() {
   const [step, setStep] = useState(0); // 0 = intro, 1-5 = questions, 6 = email, 7 = result
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [, setSubmitted] = useState(false);
 
   const currentQ = questions[step - 1];
   const totalSteps = questions.length;
@@ -318,4 +318,14 @@ export default function MissionPlanner() {
 
             <div className="text-center">
               <Link href="/">
-                <span className="font-ui text-sm under
+                <span className="font-ui text-sm underline" style={{ color: "oklch(0.45 0.04 140)" }}>
+                  Return to Home
+                </span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
