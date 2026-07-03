@@ -21,6 +21,7 @@ export default function Nav() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -29,20 +30,21 @@ export default function Nav() {
     setOpen(false);
   }, [location]);
 
+  const navLinkStyle = (href: string) => ({
+    color: location === href ? "oklch(0.72 0.10 40)" : "oklch(0.88 0.01 80)",
+  });
+
   return (
     <header
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        background: scrolled
-          ? "oklch(0.22 0.04 140 / 0.97)"
-          : "oklch(0.22 0.04 140)",
+        background: scrolled ? "oklch(0.22 0.04 140 / 0.97)" : "oklch(0.22 0.04 140)",
         backdropFilter: scrolled ? "blur(12px)" : "none",
         boxShadow: scrolled ? "0 2px 20px oklch(0 0 0 / 0.15)" : "none",
       }}
     >
       <div className="container">
         <div className="flex items-center justify-between h-16 lg:h-18">
-          {/* Logo */}
           <Link href="/">
             <div className="flex items-center gap-2 group">
               <div
@@ -51,64 +53,45 @@ export default function Nav() {
               >
                 <Leaf className="w-4 h-4" style={{ color: "oklch(0.99 0.008 80)" }} />
               </div>
-              <span
-                className="font-display text-lg tracking-tight"
-                style={{ color: "oklch(0.99 0.008 80)", letterSpacing: "-0.02em" }}
-              >
+              <span className="font-display text-lg tracking-tight" style={{ color: "oklch(0.99 0.008 80)", letterSpacing: "-0.02em" }}>
                 Operation<span style={{ color: "oklch(0.72 0.10 40)" }}>PlantBased</span>
               </span>
             </div>
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-6">
+          <nav className="hidden lg:flex items-center gap-6" aria-label="Main navigation">
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href}>
-                <span
-                  className="font-ui text-sm transition-colors duration-150"
-                  style={{
-                    color:
-                      location === link.href
-                        ? "oklch(0.72 0.10 40)"
-                        : "oklch(0.88 0.01 80)",
-                  }}
-                >
+                <span className="font-ui text-sm transition-colors duration-150" style={navLinkStyle(link.href)}>
                   {link.label}
                 </span>
               </Link>
             ))}
           </nav>
 
-          {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
             <Link href="/newsletter">
-              <span
-                className="font-ui text-sm transition-colors duration-150"
-                style={{ color: "oklch(0.88 0.01 80)" }}
-              >
+              <span className="font-ui text-sm transition-colors duration-150" style={navLinkStyle("/newsletter")}>
                 Newsletter
               </span>
             </Link>
             <Link href="/mission-planner">
-              <button className="btn-primary text-sm py-2 px-5">
-                Take the Free Quiz →
-              </button>
+              <button className="btn-primary text-sm py-2 px-5">Take the Free Quiz →</button>
             </Link>
           </div>
 
-          {/* Mobile Hamburger */}
           <button
             className="lg:hidden p-2 rounded-md transition-colors duration-150"
             style={{ color: "oklch(0.99 0.008 80)" }}
-            onClick={() => setOpen(!open)}
+            onClick={() => setOpen((value) => !value)}
             aria-label="Toggle menu"
+            aria-expanded={open}
           >
             {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <div
         className="lg:hidden overflow-hidden transition-all duration-300"
         style={{
@@ -116,20 +99,14 @@ export default function Nav() {
           background: "oklch(0.20 0.04 140)",
         }}
       >
-        <div className="container py-4 flex flex-col gap-1">
+        <nav className="container py-4 flex flex-col gap-1" aria-label="Mobile navigation">
           {navLinks.map((link) => (
             <Link key={link.href} href={link.href}>
               <div
                 className="py-3 px-2 font-ui text-base rounded-md transition-colors duration-150"
                 style={{
-                  color:
-                    location === link.href
-                      ? "oklch(0.72 0.10 40)"
-                      : "oklch(0.88 0.01 80)",
-                  background:
-                    location === link.href
-                      ? "oklch(0.28 0.04 140)"
-                      : "transparent",
+                  ...navLinkStyle(link.href),
+                  background: location === link.href ? "oklch(0.28 0.04 140)" : "transparent",
                 }}
               >
                 {link.label}
@@ -137,15 +114,15 @@ export default function Nav() {
             </Link>
           ))}
           <Link href="/newsletter">
-            <div className="py-3 px-2 font-ui text-base" style={{ color: "oklch(0.88 0.01 80)" }}>
-              Newsletter
-            </div>
+            <div className="py-3 px-2 font-ui text-base" style={navLinkStyle("/newsletter")}>Newsletter</div>
           </Link>
           <div className="pt-2">
             <Link href="/mission-planner">
-              <button className="btn-primary w-full text-sm">
-                Take the Free Quiz →
-              </button>
+              <button className="btn-primary w-full text-sm">Take the Free Quiz →</button>
             </Link>
           </div>
-        <
+        </nav>
+      </div>
+    </header>
+  );
+}
